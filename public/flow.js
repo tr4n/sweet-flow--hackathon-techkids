@@ -33,16 +33,22 @@
                 type: "GET",
                 success(data) {
                     console.log(data);
-                    let bug = false;
+                    let bugFix = false;
+                   
                     for (let i = 0; i < gameId; i++) {
-                        if (data.level.indexOf(letters[i]) == -1) {
-                            bug = true;
-                            break;
-                        }
+                       //  const count= (data.level.match(new RegExp(letters[i], "g")));
+                       count = data.level.split(letters[i]).length -1; 
+                         console.log(count);
+                         if(count == 0 || count % 2 == 1) {
+                            console.log("bug" + data.level);
+                             bugFix = true; 
+                             break; 
+                         }
                     }
+                
 
                     // var item = (levels[gameId])[Math.floor(Math.random()*levels[gameId].length)];
-                    const level = bug ? (levels[gameId])[Math.floor(Math.random() * levels[gameId].length)] : data.level;
+                    const level = bugFix ? (levels[gameId])[Math.floor(Math.random() * levels[gameId].length)] : data.level;
                     console.log(level);
                     _loadLevel(level);
 
